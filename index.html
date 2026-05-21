@@ -313,7 +313,7 @@
                     </div>
                     <div class="agent-avatar">🤖</div>
                     <h3>Ask Me Anything</h3>
-                    <p>这是一个基于 <strong>Claude + Tool Use</strong> 构建的 Agent Demo。它了解我的全部工作背景，会根据你的问题自主选择工具检索数据，再合成自然语言回答。</p>
+                    <p>这是一个基于 <strong>DeepSeek + Tool Use</strong> 构建的 Agent Demo。它了解我的全部工作背景，会根据你的问题自主选择工具检索数据，再合成自然语言回答。</p>
                     <div class="agent-tech-tags">
                         <span class="agent-tech">Tool Use</span>
                         <span class="agent-tech">Multi-turn</span>
@@ -322,16 +322,45 @@
                     </div>
                     <button class="btn btn-primary agent-open-btn" id="agentOpenBtn">开始对话 →</button>
                 </div>
-                <div class="agent-examples reveal">
+                <div class="agent-right reveal">
                     <p class="examples-label">试着问：</p>
                     <div class="example-list">
                         <button class="example-q" data-q="你在美团做过哪些技术优化？">你在美团做过哪些技术优化？</button>
                         <button class="example-q" data-q="Suggest 兜底方案达到了什么性能指标？">Suggest 兜底方案达到了什么性能指标？</button>
-                        <button class="example-q" data-q="你对向量检索有哪些实践经验？">你对向量检索有哪些实践经验？</button>
-                        <button class="example-q" data-q="你熟悉哪些 AI 相关技术？">你熟悉哪些 AI 相关技术？</button>
+                        <button class="example-q" data-q="GitHub 上最近有什么热门 AI 项目？">GitHub 上最近有什么热门 AI 项目？</button>
+                        <button class="example-q" data-q="有哪些最新的 LLM Agent 论文？">有哪些最新的 LLM Agent 论文？</button>
                         <button class="example-q" data-q="如何联系你？">如何联系你？</button>
                     </div>
                 </div>
+            </div>
+
+            <!-- Daily Digest -->
+            <div class="digest-section reveal">
+                <div class="digest-header">
+                    <h3 class="digest-title">今日 AI 动态</h3>
+                    <span class="digest-hint">Agent 实时抓取 · 每次访问更新</span>
+                </div>
+                <div class="digest-grid">
+                    <div class="digest-col">
+                        <div class="digest-col-header">
+                            <span class="digest-col-icon">🐙</span>
+                            <span>GitHub Trending</span>
+                        </div>
+                        <div id="digestGithub" class="digest-items">
+                            <div class="digest-loading"><span></span><span></span><span></span></div>
+                        </div>
+                    </div>
+                    <div class="digest-col">
+                        <div class="digest-col-header">
+                            <span class="digest-col-icon">📄</span>
+                            <span>ArXiv 最新论文</span>
+                        </div>
+                        <div id="digestPapers" class="digest-items">
+                            <div class="digest-loading"><span></span><span></span><span></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             </div>
         </div>
     </section>
