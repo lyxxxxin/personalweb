@@ -67,3 +67,107 @@ window.addEventListener('scroll', () => {
         a.classList.toggle('active', a.getAttribute('href') === `#${current}`);
     });
 }, { passive: true });
+
+// ===== CHAT WIDGET =====
+const chatFab     = document.getElementById('chatFab');
+const chatPanel   = document.getElementById('chatPanel');
+const chatInput   = document.getElementById('chatInput');
+const chatSendBtn = document.getElementById('chatSendBtn');
+const chatMsgs    = document.getElementById('chatMessages');
+const chatCloseBtn = document.getElementById('chatCloseBtn');
+
+let chatHistory = [];   // { role, content } pairs (text only)
+let chatOpen    = false;
+let chatBusy    = false;
+
+function toggleChat(forceOpen) {
+    chatOpen = forceOpen !== undefined ? forceOpen : !chatOpen;
+    chatFab.classList.toggle('open', chatOpen);
+    chatPanel.classList.toggle('open', chatOpen);
+    if (chatOpen) setTimeout(() => chatInput.focus(), 250);
+}
+
+chatFab.addEventListener('click', () => toggleChat());
+chatCloseBtn.addEventListener('click', () => toggleChat(false));
+
+// "开始对话" button in agent section
+document.getElementById('agentOpenBtn').addEventListener('click', () => {
+    document.getElementById('chatPanel').scrollIntoView({ behavior: 'smooth', block: 'end' });
+    toggleChat(true);
+});
+
+// Example question buttons
+document.querySelectorAll('.example-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const q = btn.dataset.q;
+        toggleChat(true);
+        setTimeout(() => sendMessage(q), 300);
+    });
+});
+
+// Send on Enter
+chatInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+});
+chatSendBtn.addEventListener('click', () => sendMessage());
+
+function appendMsg(role, html) {
+    const div = document.createElement('div');
+    div.className = `chat-msg ${role}`;
+    div.innerHTML = html;
+    chatMsgs.appendChild(div);
+    chatMsgs.scrollTop = chatMsgs.scrollHeight;
+    return div;
+}
+
+function showTyping() {
+    return appendMsg('loading', '<div class="typing-dots"><span></span><span></span><span></span></div>');
+}
+
+async function sendMessage(preset) {
+    const text = (preset || chatInput.value).trim();
+    if (!text || chatBusy) return;
+
+    chatInput.value = '';
+    chatBusy = true;
+    chatSendBtn.disabled = true;
+
+    appendMsg('user', escapeHtml(text));
+    const loader = showTyping();
+
+    try {
+        const res = await fetch('/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: text, history: chatHistory }),
+        });
+
+        const data = await res.json();
+        loader.remove();
+
+        const reply = data.response || data.error || '抱歉，出现了错误，请重试。';
+        appendMsg('assistant', formatReply(reply));
+
+        // Keep last 10 turns to avoid token bloat
+        chatHistory.push({ role: 'user', content: text });
+        chatHistory.push({ role: 'assistant', content: reply });
+        if (chatHistory.length > 20) chatHistory = chatHistory.slice(-20);
+
+    } catch {
+        loader.remove();
+        appendMsg('assistant', '网络错误，请检查连接后重试。');
+    }
+
+    chatBusy = false;
+    chatSendBtn.disabled = false;
+    chatInput.focus();
+}
+
+function escapeHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function formatReply(text) {
+    // Convert newlines to <p> blocks for readability
+    return text.split(/\n+/).filter(Boolean).map(p => `<p>${escapeHtml(p)}</p>`).join('');
+}

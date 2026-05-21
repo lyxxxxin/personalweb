@@ -20,6 +20,7 @@
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#skills">Skills</a></li>
+                <li><a href="#agent">Agent</a></li>
                 <li><a href="#contact" class="nav-cta">Contact</a></li>
             </ul>
             <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
@@ -298,11 +299,48 @@
         </div>
     </section>
 
+    <!-- Agent -->
+    <section id="agent" class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">05. Agent</span>
+                <h2 class="section-title">AI 助手</h2>
+            </div>
+            <div class="agent-layout">
+                <div class="agent-intro-card reveal">
+                    <div class="agent-card-header">
+                        <span class="agent-badge">Live Demo</span>
+                    </div>
+                    <div class="agent-avatar">🤖</div>
+                    <h3>Ask Me Anything</h3>
+                    <p>这是一个基于 <strong>Claude + Tool Use</strong> 构建的 Agent Demo。它了解我的全部工作背景，会根据你的问题自主选择工具检索数据，再合成自然语言回答。</p>
+                    <div class="agent-tech-tags">
+                        <span class="agent-tech">Tool Use</span>
+                        <span class="agent-tech">Multi-turn</span>
+                        <span class="agent-tech">Claude Haiku</span>
+                        <span class="agent-tech">Vercel Functions</span>
+                    </div>
+                    <button class="btn btn-primary agent-open-btn" id="agentOpenBtn">开始对话 →</button>
+                </div>
+                <div class="agent-examples reveal">
+                    <p class="examples-label">试着问：</p>
+                    <div class="example-list">
+                        <button class="example-q" data-q="你在美团做过哪些技术优化？">你在美团做过哪些技术优化？</button>
+                        <button class="example-q" data-q="Suggest 兜底方案达到了什么性能指标？">Suggest 兜底方案达到了什么性能指标？</button>
+                        <button class="example-q" data-q="你对向量检索有哪些实践经验？">你对向量检索有哪些实践经验？</button>
+                        <button class="example-q" data-q="你熟悉哪些 AI 相关技术？">你熟悉哪些 AI 相关技术？</button>
+                        <button class="example-q" data-q="如何联系你？">如何联系你？</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact -->
     <section id="contact" class="section">
         <div class="container">
             <div class="section-header">
-                <span class="section-label">05. Contact</span>
+                <span class="section-label">06. Contact</span>
                 <h2 class="section-title">联系我</h2>
             </div>
             <div class="contact-content">
@@ -326,6 +364,42 @@
             </div>
         </div>
     </section>
+
+    <!-- Chat Widget -->
+    <button class="chat-fab" id="chatFab" aria-label="打开 AI 助手">
+        <svg class="fab-icon-open" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        <svg class="fab-icon-close" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+
+    <div class="chat-panel" id="chatPanel">
+        <div class="chat-header">
+            <div class="chat-header-left">
+                <div class="chat-avatar-sm">🤖</div>
+                <div>
+                    <p class="chat-name">龙雨欣 AI 助手</p>
+                    <p class="chat-status"><span class="status-dot"></span>在线</p>
+                </div>
+            </div>
+            <button class="chat-close-btn" id="chatCloseBtn" aria-label="关闭">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="chat-msg assistant">
+                <p>你好！我是龙雨欣的 AI 助手 👋</p>
+                <p>可以问我她的工作经历、项目详情、技能栈或联系方式，我来帮你了解。</p>
+            </div>
+        </div>
+        <div class="chat-footer">
+            <div class="chat-input-row">
+                <input type="text" id="chatInput" class="chat-input" placeholder="输入问题…" autocomplete="off">
+                <button class="chat-send-btn" id="chatSendBtn" aria-label="发送">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                </button>
+            </div>
+            <p class="chat-hint">由 Claude Haiku + Tool Use 驱动</p>
+        </div>
+    </div>
 
     <footer class="footer">
         <p>© 2025 龙雨欣 · Backend Engineer</p>
