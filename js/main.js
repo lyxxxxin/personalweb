@@ -227,8 +227,67 @@ function escapeHtml(str) {
     return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
+// Apply inline markdown: **bold**, *italic*, `code`
+function applyInline(raw) {
+    return escapeHtml(raw)
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(?!\s)(.+?)(?<!\s)\*/g, '<em>$1</em>')
+        .replace(/`([^`]+)`/g, '<code>$1</code>');
+}
+
 function formatReply(text) {
-    return text.split(/\n+/).filter(Boolean).map(p => `<p>${escapeHtml(p)}</p>`).join('');
+    const lines  = text.split('\n');
+    const blocks = [];
+    let listItems = [];
+    let listType  = null;           // 'ul' | 'ol'
+
+    const flushList = () => {
+        if (!listItems.length) return;
+        const tag  = listType === 'ol' ? 'ol' : 'ul';
+        const items = listItems.map(t => `<li>${applyInline(t)}</li>`).join('');
+        blocks.push(`<${tag}>${items}</${tag}>`);
+        listItems = [];
+        listType  = null;
+    };
+
+    for (const raw of lines) {
+        const line = raw.trim();
+
+        if (!line) { flushList(); continue; }
+
+        // ### Heading → bold paragraph
+        const hMatch = line.match(/^#{1,3}\s+(.*)/);
+        if (hMatch) {
+            flushList();
+            blocks.push(`<p class="reply-h">${applyInline(hMatch[1])}</p>`);
+            continue;
+        }
+
+        // Unordered list  - item  or  • item
+        const ulMatch = line.match(/^[-•·]\s+(.*)/);
+        if (ulMatch) {
+            if (listType === 'ol') flushList();
+            listType = 'ul';
+            listItems.push(ulMatch[1]);
+            continue;
+        }
+
+        // Ordered list  1. item
+        const olMatch = line.match(/^(\d+)[.)]\s+(.*)/);
+        if (olMatch) {
+            if (listType === 'ul') flushList();
+            listType = 'ol';
+            listItems.push(olMatch[2]);
+            continue;
+        }
+
+        // Regular paragraph
+        flushList();
+        blocks.push(`<p>${applyInline(line)}</p>`);
+    }
+
+    flushList();
+    return blocks.join('');
 }
 
 // ===== DIGEST WIDGET =====
