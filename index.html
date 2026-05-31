@@ -203,10 +203,49 @@
                     </div>
                 </div>
 
+                <div class="project-card wide agent-card reveal">
+                    <div class="project-main">
+                        <div class="project-header">
+                            <div class="project-icon">🧠</div>
+                            <span class="project-num">02</span>
+                        </div>
+                        <h3 class="project-title">长期记忆 Agent 状态化记忆管理系统</h3>
+                        <p class="project-desc">面向长期交互型 Agent 场景，传统向量检索难以区分最新状态与过时偏好。独立设计并实现覆盖结构化状态建模、时间感知召回与完整评测闭环的记忆管理系统。</p>
+                        <div class="project-metrics">
+                            <div class="metric">
+                                <span class="metric-val">0.952</span>
+                                <span class="metric-label">状态链 F1</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-val">0.817</span>
+                                <span class="metric-label">压力测试 ACC</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-val">↑52%</span>
+                                <span class="metric-label">vs 纯语义检索</span>
+                            </div>
+                        </div>
+                        <div class="project-tags">
+                            <span class="tech-tag">LLM Agent</span>
+                            <span class="tech-tag">RAG</span>
+                            <span class="tech-tag">DeepSeek API</span>
+                            <span class="tech-tag">时间感知召回</span>
+                            <span class="tech-tag">评测体系</span>
+                        </div>
+                    </div>
+                    <div class="project-detail">
+                        <ul class="project-highlights">
+                            <li>将非结构化对话记忆转化为"实体—状态值—事件类型"结构化状态轨迹，接入 <strong>DeepSeek API</strong> 实现自动状态抽取，设计实体归一化与状态修复流程，状态链构造 <strong>F1 从 0.817 → 0.952</strong></li>
+                            <li>实现<strong>时间感知记忆评分</strong>机制，在语义相关性之外引入历史状态权重，解决传统方案中过时记忆干扰最新状态召回的问题</li>
+                            <li>构建含 50 场景 / 230 记忆 / 175 查询的评测集；过时记忆压力测试中时间感知机制 <strong>ACC 0.817</strong>，相比纯语义检索 <strong>↑52%</strong>，相比仅用最新记忆策略 ↑13%</li>
+                        </ul>
+                    </div>
+                </div>
+
                 <div class="project-card featured reveal">
                     <div class="project-header">
                         <div class="project-icon">🛡️</div>
-                        <span class="project-num">02</span>
+                        <span class="project-num">03</span>
                     </div>
                     <h3 class="project-title">搜索 Suggest 稳定性建设</h3>
                     <p class="project-desc">从零搭建全场景兜底保障体系，覆盖主搜、闪购、医药等全业务场景，彻底解决 Suggest 服务异常宕机风险。</p>
@@ -240,7 +279,7 @@
                 <div class="project-card reveal">
                     <div class="project-header">
                         <div class="project-icon">🔥</div>
-                        <span class="project-num">03</span>
+                        <span class="project-num">04</span>
                     </div>
                     <h3 class="project-title">闪购热榜建设</h3>
                     <p class="project-desc">负责热榜搜索链路整体方案设计与落地，重构榜单生产链路，提升热榜内容质量、实时性与用户浏览体验。</p>
@@ -255,45 +294,6 @@
                         <span class="tech-tag">多源召回</span>
                         <span class="tech-tag">排序融合</span>
                         <span class="tech-tag">实时计算</span>
-                    </div>
-                </div>
-
-                <div class="project-card wide agent-card reveal">
-                    <div class="project-main">
-                        <div class="project-header">
-                            <div class="project-icon">🧠</div>
-                            <span class="project-num">04</span>
-                        </div>
-                        <h3 class="project-title">长期记忆 Agent 状态化记忆管理系统</h3>
-                        <p class="project-desc">面向长期交互型 Agent 场景，传统向量检索难以区分最新状态与过时偏好。独立设计并实现覆盖结构化状态建模、时间感知召回与完整评测闭环的记忆管理系统。</p>
-                        <div class="project-metrics">
-                            <div class="metric">
-                                <span class="metric-val">0.952</span>
-                                <span class="metric-label">状态链 F1</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-val">0.817</span>
-                                <span class="metric-label">压力测试 ACC</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-val">↑52%</span>
-                                <span class="metric-label">vs 纯语义检索</span>
-                            </div>
-                        </div>
-                        <div class="project-tags">
-                            <span class="tech-tag">LLM Agent</span>
-                            <span class="tech-tag">RAG</span>
-                            <span class="tech-tag">DeepSeek API</span>
-                            <span class="tech-tag">时间感知召回</span>
-                            <span class="tech-tag">评测体系</span>
-                        </div>
-                    </div>
-                    <div class="project-detail">
-                        <ul class="project-highlights">
-                            <li>将非结构化对话记忆转化为"实体—状态值—事件类型"结构化状态轨迹，接入 <strong>DeepSeek API</strong> 实现自动状态抽取，设计实体归一化与状态修复流程，状态链构造 <strong>F1 从 0.817 → 0.952</strong></li>
-                            <li>实现<strong>时间感知记忆评分</strong>机制，在语义相关性之外引入历史状态权重，解决传统方案中过时记忆干扰最新状态召回的问题</li>
-                            <li>构建含 50 场景 / 230 记忆 / 175 查询的评测集；过时记忆压力测试中时间感知机制 <strong>ACC 0.817</strong>，相比纯语义检索 <strong>↑52%</strong>，相比仅用最新记忆策略 ↑13%</li>
-                        </ul>
                     </div>
                 </div>
 
