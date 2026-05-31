@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>龙雨欣 — Backend Engineer</title>
+    <title>龙雨欣 — Backend & Agent Engineer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -42,12 +42,12 @@
             <h2 class="hero-title">
                 <span id="typedText"></span><span class="cursor">|</span>
             </h2>
-            <p class="hero-desc">专注于搜索推荐系统 · 大规模分布式架构 · 高可用服务稳定性建设</p>
+            <p class="hero-desc">专注于高性能搜索系统 · 分布式架构 · AI Agent 开发</p>
             <div class="hero-tags">
                 <span class="tag">美团</span>
                 <span class="tag">2 年经验</span>
                 <span class="tag">四川大学硕士</span>
-                <span class="tag">后端开发</span>
+                <span class="tag">后端/Agent 开发</span>
             </div>
             <div class="hero-actions">
                 <a href="#projects" class="btn btn-primary">查看项目</a>
@@ -69,15 +69,15 @@
             <div class="about-grid">
                 <div class="about-text reveal">
                     <p>目前在 <strong>美团搜索推荐技术部</strong> 担任软件开发工程师，专注于大规模搜索系统的稳定性建设与性能优化。</p>
-                    <p>具备搜索离线及在线全链路的系统性理解，能够独立承担技术方案设计；在兜底容灾、向量索引、检索性能等方向有实质性积累。</p>
-                    <p>同时对 AI 技术保持浓厚兴趣，了解 LLM 与 Agent 基本原理与应用范式，持续探索 AI 与搜索推荐的结合方向。</p>
+                    <p>具备搜索离线及在线全链路的系统性理解，能够独立承担技术方案设计；在 ES 插件定制、向量计算加速、兜底容灾等方向有实质性积累。</p>
+                    <p>在 AI Agent 领域具备实战经验，独立设计并实现了长期记忆 Agent 系统，熟悉 LLM 工具调用、RAG 与 Agent 架构，持续探索 AI 与搜索推荐的深度融合。</p>
                     <div class="about-stats">
                         <div class="stat">
                             <span class="stat-num">2+</span>
                             <span class="stat-label">年工作经验</span>
                         </div>
                         <div class="stat">
-                            <span class="stat-num">3</span>
+                            <span class="stat-num">4</span>
                             <span class="stat-label">核心项目</span>
                         </div>
                         <div class="stat">
@@ -169,20 +169,33 @@
                         <div class="project-icon">⚡</div>
                         <span class="project-num">01</span>
                     </div>
-                    <h3 class="project-title">向量索引稳定性建设与召回性能优化</h3>
-                    <p class="project-desc">深度参与外卖向量检索架构迭代优化，聚焦离线索引发布保障与在线召回性能优化。</p>
+                    <h3 class="project-title">ES 向量搜索引擎性能优化</h3>
+                    <p class="project-desc">外卖搜索对数千万 POI/SPU 文档进行向量相似度召回，叠加 LBS 限制与业务属性过滤，主导全链路性能优化，覆盖 ES 插件定制、向量计算加速与大候选集过滤链路。</p>
                     <ul class="project-highlights">
-                        <li>封装原生 HTTP 接口，新增 <strong>Thrift 协议</strong>调用支持，减少序列化开销</li>
-                        <li>定制 ES 插件将 <strong>IVF-PQ+REFINE 两阶段检索</strong>逻辑下沉服务端，消除跨机房往返损耗</li>
-                        <li>搭建向量索引全生命周期保障体系，落地预热、多维质量校验、<strong>异常自动回滚</strong></li>
-                        <li>商品正排数据迁移至 Redis，缓解集群内存资源竞争，减少无效计算开销</li>
+                        <li>将 <strong>IVF-PQ + Refine 两阶段检索</strong>下沉至数据节点串联执行，消除跨节点 RTT，端到端平均延迟从 28ms 降至 18ms（↓36%）</li>
+                        <li>绕过 Lucene 解码路径，通过 <strong>mmap</strong> 直接定位堆外原始向量，配合 <strong>Faiss AVX2 SIMD</strong> 加速距离计算；索引构建阶段按地理层级物理排序提升 Cache Line 命中率</li>
+                        <li>实现 <strong>CacheTermsQuery</strong> 替代原生 terms 查询，引入分级缓存策略（大 segment 异步预构建位图索引、小 segment HashMap O(1) 寻址），综合查询延迟降低约 50%</li>
                     </ul>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <span class="metric-val">28→18ms</span>
+                            <span class="metric-label">端到端延迟</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-val">↓36%</span>
+                            <span class="metric-label">延迟降幅</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-val">↓50%</span>
+                            <span class="metric-label">查询延迟优化</span>
+                        </div>
+                    </div>
                     <div class="project-tags">
                         <span class="tech-tag">IVF-PQ</span>
-                        <span class="tech-tag">Elasticsearch</span>
-                        <span class="tech-tag">Thrift</span>
-                        <span class="tech-tag">Redis</span>
-                        <span class="tech-tag">向量检索</span>
+                        <span class="tech-tag">Faiss / SIMD</span>
+                        <span class="tech-tag">mmap</span>
+                        <span class="tech-tag">ES Plugin</span>
+                        <span class="tech-tag">CacheTermsQuery</span>
                     </div>
                 </div>
 
@@ -241,6 +254,41 @@
                     </div>
                 </div>
 
+                <div class="project-card reveal">
+                    <div class="project-header">
+                        <div class="project-icon">🧠</div>
+                        <span class="project-num">04</span>
+                    </div>
+                    <h3 class="project-title">长期记忆 Agent 状态化记忆管理系统</h3>
+                    <p class="project-desc">面向长期交互型 Agent 场景，传统向量检索难以区分最新状态与过时偏好。独立设计并实现覆盖结构化状态建模、时间感知召回与完整评测闭环的记忆管理系统。</p>
+                    <ul class="project-highlights">
+                        <li>将非结构化对话记忆转化为"实体—状态值—事件类型"结构化状态轨迹，接入 <strong>DeepSeek API</strong> 实现自动状态抽取，设计实体归一化与状态修复流程，状态链构造 <strong>F1 从 0.817 → 0.952</strong></li>
+                        <li>实现<strong>时间感知记忆评分</strong>机制，在语义相关性之外引入历史状态权重，解决传统方案中过时记忆干扰最新状态召回的问题</li>
+                        <li>构建含 50 场景 / 230 记忆 / 175 查询的评测集；过时记忆压力测试中时间感知机制 <strong>ACC 0.817</strong>，相比纯语义检索 <strong>↑52%</strong>，相比仅用最新记忆策略 ↑13%</li>
+                    </ul>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <span class="metric-val">0.952</span>
+                            <span class="metric-label">状态链 F1</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-val">0.817</span>
+                            <span class="metric-label">压力测试 ACC</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-val">↑52%</span>
+                            <span class="metric-label">vs 纯语义检索</span>
+                        </div>
+                    </div>
+                    <div class="project-tags">
+                        <span class="tech-tag">LLM Agent</span>
+                        <span class="tech-tag">RAG</span>
+                        <span class="tech-tag">DeepSeek API</span>
+                        <span class="tech-tag">时间感知召回</span>
+                        <span class="tech-tag">评测体系</span>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -287,12 +335,15 @@
                     </div>
                 </div>
                 <div class="skill-category reveal">
-                    <h3 class="skill-cat-title"><span class="skill-icon">🤖</span> AI 技术</h3>
+                    <h3 class="skill-cat-title"><span class="skill-icon">🤖</span> AI Agent</h3>
                     <div class="skill-tags">
                         <span class="skill-tag level-expert">Python</span>
                         <span class="skill-tag level-expert">PyTorch</span>
-                        <span class="skill-tag level-mid">LLM</span>
-                        <span class="skill-tag level-mid">Agent</span>
+                        <span class="skill-tag level-expert">LLM / Tool Use</span>
+                        <span class="skill-tag level-expert">Agent 架构</span>
+                        <span class="skill-tag level-mid">RAG / 向量召回</span>
+                        <span class="skill-tag level-mid">记忆系统设计</span>
+                        <span class="skill-tag level-mid">DeepSeek API</span>
                     </div>
                 </div>
             </div>
@@ -329,6 +380,7 @@
                         <button class="example-q" data-q="Suggest 兜底方案达到了什么性能指标？">Suggest 兜底方案达到了什么性能指标？</button>
                         <button class="example-q" data-q="GitHub 上最近有什么热门 AI 项目？">GitHub 上最近有什么热门 AI 项目？</button>
                         <button class="example-q" data-q="有哪些最新的 LLM Agent 论文？">有哪些最新的 LLM Agent 论文？</button>
+                        <button class="example-q" data-q="长期记忆 Agent 系统是如何解决过时记忆问题的？">长期记忆 Agent 系统怎么做的？</button>
                         <button class="example-q" data-q="如何联系你？">如何联系你？</button>
                     </div>
                 </div>
@@ -373,7 +425,7 @@
                 <h2 class="section-title">联系我</h2>
             </div>
             <div class="contact-content">
-                <p class="contact-desc">目前正在寻找后端开发机会，欢迎交流与合作 👋</p>
+                <p class="contact-desc">目前正在寻找后端开发 / Agent 开发机会，欢迎交流与合作 👋</p>
                 <div class="contact-links">
                     <a href="mailto:lyx8210@gmail.com" class="contact-card reveal">
                         <span class="contact-icon">✉️</span>
@@ -431,7 +483,7 @@
     </div>
 
     <footer class="footer">
-        <p>© 2025 龙雨欣 · Backend Engineer</p>
+        <p>© 2025 龙雨欣 · Backend & Agent Engineer</p>
     </footer>
 
     <script src="js/main.js"></script>

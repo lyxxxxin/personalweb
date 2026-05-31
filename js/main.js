@@ -19,6 +19,7 @@ navLinks.querySelectorAll('a').forEach(a => {
 const phrases = [
     'Backend Engineer',
     '搜索系统工程师',
+    'AI Agent Developer',
     '分布式架构专家',
     'Java Developer',
 ];

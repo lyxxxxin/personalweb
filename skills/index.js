@@ -30,8 +30,8 @@ const getProjectDetails = {
     properties: {
       project: {
         type: 'string',
-        enum: ['vector_index', 'suggest_stability', 'hot_list'],
-        description: 'vector_index / suggest_stability / hot_list',
+        enum: ['es_vector_search', 'suggest_stability', 'hot_list', 'memory_agent'],
+        description: 'es_vector_search / suggest_stability / hot_list / memory_agent',
       },
     },
     required: ['project'],
