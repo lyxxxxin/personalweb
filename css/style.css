@@ -476,8 +476,30 @@ body {
 /* ===== PROJECTS ===== */
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
+}
+
+/* Wide cards (01 & 04) span both columns */
+.project-card.wide {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 2.5rem;
+    align-items: start;
+}
+.project-card.wide .project-main  { display: flex; flex-direction: column; gap: 0; }
+.project-card.wide .project-main  .project-tags { margin-top: auto; padding-top: 1.25rem; }
+.project-card.wide .project-detail { display: flex; flex-direction: column; gap: 0; }
+
+/* Agent card — cyan accent */
+.project-card.agent-card {
+    border-color: rgba(34, 211, 238, 0.25);
+    background: rgba(34, 211, 238, 0.025);
+}
+.project-card.agent-card::before {
+    background: linear-gradient(90deg, var(--cyan), #818cf8);
+    opacity: 1;
 }
 .project-card {
     position: relative;
@@ -1164,10 +1186,20 @@ body {
 }
 
 /* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+    /* Wide cards collapse to single-column internal layout */
+    .project-card.wide {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+    .project-card.wide .project-main .project-tags { padding-top: 1rem; }
+}
+
 @media (max-width: 800px) {
     .about-grid    { grid-template-columns: 1fr; }
     .skills-grid   { grid-template-columns: 1fr; }
     .projects-grid { grid-template-columns: 1fr; }
+    .project-card.wide { grid-template-columns: 1fr; }
     .agent-layout  { grid-template-columns: 1fr; }
 }
 
